@@ -1,6 +1,6 @@
 name = "bitrot-portfolio"
+main = "src/index.js"
 compatibility_date = "2025-04-05"
 
-# If you're deploying static assets only
 [site]
 bucket = "./"  # Directory containing your HTML files
