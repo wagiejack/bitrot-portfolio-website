@@ -1,6 +1,0 @@
-name = "bitrot-portfolio"
-main = "src/index.js"
-compatibility_date = "2025-04-05"
-
-[site]
-bucket = "./"  # Directory containing your HTML files
