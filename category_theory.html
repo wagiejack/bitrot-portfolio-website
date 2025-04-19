@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="img/x_pfp.jpg">
+    <title>bitrots website</title>
+    <style>
+        @font-face {
+            font-family: 'Roboto Mono';
+            src: url('fonts/Roboto_Mono/static/RobotoMono-Bold.ttf') format('truetype');
+            font-weight: bold;  /* Changed from normal to bold */
+            font-style: normal;
+            font-display: swap;
+        }
+        :root {
+            --deep-gold: #FFD700;
+            --background: #000000;
+        }
+        .highlight {
+            color:var(--deep-gold);
+        }
+        body {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-color: var(--background);
+            color: white;
+            font-weight: bolder;
+        }
+        .nav-bar {
+            display: none;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100vw;         
+            box-sizing: border-box; 
+            background: var(--background);     
+            padding: 1rem 0;
+        }
+        .active_nav_bar{
+            display: flex;
+        }
+        .link {
+            color: white;
+            text-decoration: none;
+        }
+        .page {
+            display: none;
+            width: 90%;                 /* Take 90% of container width */
+            margin: 0 auto 2rem auto;   /* Center horizontally and add bottom margin */
+            padding: 0 2rem 0 2rem;
+        }
+        .active {
+            display:block;
+        }
+        p {
+            white-space: pre-line;
+            text-align: center;          /* Align text to left */
+            margin-bottom: 1rem;  
+        }
+    </style>
+    <script defer>
+        const page_lower_limit = '1'
+        function getRandomLightColor() {
+            // Generate light colors by keeping high values
+            const hue = Math.floor(Math.random() * 360);
+            const saturation = Math.floor(Math.random() * 30) + 70; // 70-100%
+            const lightness = Math.floor(Math.random() * 20) + 70;  // 70-90%
+            return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        }
+        function assignUniqueColors() {
+            const indexItems = document.querySelectorAll('.index_item');
+            let lastColor = '';
+            
+            indexItems.forEach(item => {
+                let newColor;
+                do {
+                    newColor = getRandomLightColor();
+                } while (newColor === lastColor);
+                item.style.color = newColor;
+                lastColor = newColor;
+            });
+        }
+        function getCurrentPageId() {
+            const activePage = document.querySelector('.page.active');
+            return activePage ? String(activePage.id) : null;
+        }
+        function get_previous_page_and_activate(){
+            var id = getCurrentPageId();
+            if (id==='index'){
+                return;
+            }
+            if (id===page_lower_limit){
+                showPage('index')
+                return;
+            }
+            const new_val = parseInt(id,10)-1;
+            showPage(String(new_val));
+        }
+        function get_next_page_and_activate(){
+            const page_upper_limit = String(document.querySelectorAll('.page').length-1);
+            var id = getCurrentPageId();
+            if(id==='index'){
+                return;
+            }
+            if (id===page_upper_limit){
+                showPage('index')
+                return;
+            }
+            const new_val = parseInt(id,10)+1;
+            showPage(String(new_val));
+        }
+        function hide_nav_bar_if_not_index() {
+            var id = getCurrentPageId();
+            const bar = document.querySelector('.nav-bar'); // Use querySelector
+            if (id === 'index') {
+                bar.style.display = 'none'; // Hide the nav bar
+            } else {
+                bar.style.display = 'flex'; // Show the nav bar
+            }
+        }
+        function showPage(pageId){
+            //deactivating all pages
+            document.querySelectorAll('.page').forEach(page=>{
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            hide_nav_bar_if_not_index(); // Call it on page change
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            assignUniqueColors();
+            hide_nav_bar_if_not_index(); // Call it on load
+        });
+    </script>
+</head>
+<body>
+    <!---index-->
+    <div id="index" class="page active">
+        <h1 style="color:#4B0082">Index</h1>
+        <p class="index_item" onclick="showPage('1')">There is a difference between set theory and category theory?</p>
+        <p class="index_item" onclick="showPage('2')">axioms that must be satisfied for something to be called a category</p>
+        <p class="index_item" onclick="showPage('3')">programming languages in terms of category theory</p>
+        <p class="index_item" onclick="showPage('4')">domain, co-domain, image, injection, surjection, inversion</p>
+    </div>
+    <div id="1" class="page">
+        <h1 style="color:#4B0082">There is a difference between set theory and category theory?</h1>
+        <p>Yes, sets in general are a collection of elements that share common characteristics.
+
+        Black people could be considered to be of the same set, so could brown people...so could white people, Follower of a religion could be put to a set.
+
+        Now if you have a set of Christians who believe Christ is the messiah and a set of people who are Jews, there is a relation between both of these set of people as there are people in both sets who believe Moses was a prophet.
+
+        You see, both the sets of religions have a <b><u>intersection</b></u> relation between them, this forms the set of people who believe Moses is the prophet in the above example.
+
+        Now that we are clear with the definition of set and a relation, let us draw the line between category theory and set theory, 
+    
+        In Category theory, we would not bother ourselves with the elements that form the set, but rather the relations between one set and another and that is the difference between both. 
+        
+        In Category theory, we look at the relationships between the elements and in Set theory, we look at the elements in the set as well as the relations between the sets.
+
+        Sets are called <b><u>Objects</u></b> in Category theory and relationships are called <b><u>morphisms</u></b>.</p>
+    </div>
+    <div id="2" class="page">
+        <h1 style="color:#4B0082">axioms that must be satisfied for something to be called a category</h1>
+        <p>The three axioms(criteria) that must be met are Associativity, Composition and Identity
+        
+        Associativity states that if you are using morphisms to reach to another object, you must be able to use the morphisms in any order to reach to the same object
+
+        Composition states that if we are able to go to Object B from Object A via a morphism and Object C from Object B via a morphism, then there <b><u>must</u></b> exist a morphism to take us from Object A to Object C
+
+        Identity states that there must exist a morphism for every object that transforms into the same object
+        </p>
+    </div>
+    <div id="3" class="page">
+        <h1 style="color:#4B0082">programming languages in terms of category theory</h1>
+        <p>
+            If we are to look at the terms in programming languages from the lens of Category theory,
+
+            Objects are types and morphisms are functions, Objects consist of values that are categorized by similar properties, all the Integer values could be grouped into an object, so can all the Floats, Decimals and Characters and constitute an object.
+
+            We can transform a String that consists of characters between '0' and '9' to an Integer Object with a morphism that is responsible for parsing and mapping of the same.
+
+            Now, there are two types of functions/morphisms, <b><u>Pure/Total</u></b> and <b><u>partial</u></b>.
+            
+            If all the elements of an Object have a mapping in the resulting Object from the morphism, it is a Total function.
+
+            Otherwise, if there are elements in Object 1 that cannot be passed into the Morphism to get a resultant element from Object 2, it is a partial function.
+
+            If we have an Object that contains all the Integers, then the function Is_Odd that is used to detect if an Integer is odd or not, can only map to the Object that contains the elements True and False. Hence, Is_Odd is a total function.
+
+            If we take the Object of all Characters, then the function/morphism convert_Character_to_Integer is only defined for the characters between '0' and '9', for other we will have to introduce error handling to remove all other characters, this is an example of partial function.
+        </p>
+    </div>
+    <div id="4" class="page">
+        <h1 style="color:#4B0082">domain, co-domain, image, injection(mono-morphism), surjection(epi-morphism), isomorphism</h1>
+        <p>
+            Some of these are defined in terms of set and some in Category theory.
+
+            The source on which the function is applied on is the <b><u>Domain</u></b>, the Set whose elements we will get as results on application of function is the <b><u>co-Domain</u></b>.
+
+            The set of elements in co-domain which are results of the function from domain are called <u><b>image</b></u>.
+
+            Now, if all the elements from domain map to different elements from image and no two elements in the domain map to the same element in the image, then this is called a <b><u>injection</u></b>.
+
+            If the image and co-domain are the same i.e. image is not a subset of co-domain but covers all the elements for the co-domain then it is called a <b><u>surjection</u></b>.
+
+            Now, if there is a relation which is injective and surjective i.e it maps to every element in co-domain and no two elements are mapped to from the same element in domain, then we can invert the function to get the reverse-mapping from relation.
+
+            So if a relation is mapping to unique elements and all elements of the co-domain, then we can derive a reverse-relation that will convert the domain to co-domain and vice-versa, this is called <b><u>invertible</u></b>
+
+            Now, so far we have been defining all these in terms of set theory but when we move to category theory, we have to define everything in terms of relations or morphisms and not in terms of elements inside the set or Objects.
+        </p>
+    </div>
+    <h2><a href="index.html" style="text-decoration:none; color:var(--deep-gold); display:block;">Home</a></h2>
+    <div class="nav-bar">
+        <h3 style="text-decoration:none; color:#C0C0C0;" onclick="get_previous_page_and_activate()"><b><u>Prev</u></b></h3>
+        <h3 style="text-decoration:none; color:#C0C0C0;" onclick="showPage('index')"><b><u>Index</u></b></h3>
+        <h3 style="text-decoration:none; color:#C0C0C0;" onclick="get_next_page_and_activate()"><b><u>Next</u></b></h3>
+    </div>
+</body>
+</html>
